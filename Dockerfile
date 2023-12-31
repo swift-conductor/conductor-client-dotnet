@@ -23,7 +23,7 @@ RUN dotnet test -l "console;verbosity=normal"
 FROM build as pack_release
 COPY /README.md /package/Conductor/README.md
 ARG SDK_VERSION
-RUN dotnet pack "conductor-csharp.csproj" \
+RUN dotnet pack "conductor-client-dotnet.csproj" \
     -o /build \
     --include-symbols \
     --include-source \

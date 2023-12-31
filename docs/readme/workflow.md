@@ -12,7 +12,7 @@ ConductorWorkflow GetConductorWorkflow()
     return new ConductorWorkflow()
         .WithName("my_first_workflow")
         .WithVersion(1)
-        .WithOwner("developers@orkes.io")
+        .WithOwner("hello@swiftsoftwaregroup.com")
             .WithTask(new SimpleTask("simple_task_2", "simple_task_1"))
             .WithTask(new SimpleTask("simple_task_1", "simple_task_2"));
 }
@@ -31,4 +31,4 @@ var workflowId = workflowExecutor.StartWorkflow(conductorWorkflow);
 ### More Examples
 You can find more examples at the following GitHub repository:
 
-https://github.com/conductor-sdk/conductor-examples
+https://github.com/swift-conductor/conductor-examples

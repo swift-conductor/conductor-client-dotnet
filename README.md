@@ -1,52 +1,35 @@
-# Conductor OSS C# SDK
+# Swift Conductor client SDK for .NET
 
-The conductor-csharp repository provides the client SDKs to build task workers in C#.
+The conductor-client-dotnet repository provides the client SDKs to build task workers in C#.
 
 Building the task workers in C# mainly consists of the following steps:
 
-1. Setup `conductor-csharp` package
+1. Setup `conductor-client-dotnet` package
 1. Create and run task workers
 1. Create workflows using code
 1. API Documentation
 
-## ⭐ Conductor OSS
-Show support for the Conductor OSS.  Please help spread the awareness by starring Conductor repo.
+## ⭐ Swift Conductor
+Show support for Swift Conductor.  Please help spread the awareness by starring Conductor repo.
 
-[![GitHub stars](https://img.shields.io/github/stars/conductor-oss/conductor.svg?style=social&label=Star&maxAge=)](https://GitHub.com/conductor-oss/conductor/)
+[![GitHub stars](https://img.shields.io/github/stars/swift-conductor/conductor.svg?style=social&label=Star&maxAge=)](https://GitHub.com/swift-conductor/conductor/)
 
    
 ### Setup Conductor C# Package​
 
 ```shell
-dotnet add package conductor-csharp
+dotnet add package conductor-client-dotnet
 ```
 
 ## Configurations
-
-### Authentication Settings (Optional)
-Configure the authentication settings if your Conductor server requires authentication.
-* keyId: Key for authentication.
-* keySecret: Secret for the key.
-
-```csharp
-authenticationSettings: new OrkesAuthenticationSettings(
-    KeyId: "key",
-    KeySecret: "secret"
-)
-```
-
-### Access Control Setup
-See [Access Control](https://orkes.io/content/docs/getting-started/concepts/access-control) for more details on role-based access control with Conductor and generating API keys for your environment.
 
 ### Configure API Client
 ```csharp
 using Conductor.Api;
 using Conductor.Client;
-using Conductor.Client.Authentication;
 
 var configuration = new Configuration() {
     BasePath = basePath,
-    AuthenticationSettings = new OrkesAuthenticationSettings("keyId", "keySecret")
 };
 
 var workflowClient = configuration.GetClient<WorkflowResourceApi>();
@@ -58,4 +41,4 @@ workflowClient.StartWorkflow(
 )
 ```
 
-### Next: [Create and run task workers](https://github.com/conductor-sdk/conductor-csharp/blob/main/docs/readme/workers.md)
+### Next: [Create and run task workers](https://github.com/swift-conductor/conductor-client-dotnet/blob/main/docs/readme/workers.md)

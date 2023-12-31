@@ -84,7 +84,7 @@ namespace Conductor.Client
         /// </summary>
         public Configuration()
         {
-            BasePath = "https://play.orkes.io/api";
+            BasePath = "http://localhost:8080/api";
             DefaultHeader = new ConcurrentDictionary<string, string>();
             Timeout = 10000;
         }
@@ -94,8 +94,6 @@ namespace Conductor.Client
         #region Properties
 
         public readonly ApiClient ApiClient = new ApiClient();
-
-        public OrkesAuthenticationSettings AuthenticationSettings { get; set; }
 
         /// <summary>
         /// Gets or sets the base path for API access.

@@ -5,9 +5,9 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csharp-examples", "csharp-examples\csharp-examples.csproj", "{2B040019-DA49-482D-A232-ACB3C2B70CA2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "conductor-csharp", "Conductor\conductor-csharp.csproj", "{634CE97E-446D-4F85-B3DF-9028F29AABC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "conductor-client-dotnet", "Conductor\conductor-client-dotnet.csproj", "{634CE97E-446D-4F85-B3DF-9028F29AABC1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "conductor-csharp.test", "Tests\conductor-csharp.test.csproj", "{F0916AAF-FDB8-4976-9DF4-0E407AEEA188}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "conductor-client-dotnet.test", "Tests\conductor-client-dotnet.test.csproj", "{F0916AAF-FDB8-4976-9DF4-0E407AEEA188}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

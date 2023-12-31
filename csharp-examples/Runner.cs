@@ -14,10 +14,7 @@ namespace csharp_examples
         /// </summary>
         public async void RunMultiSimpleTask()
         {
-            var configuration = new Configuration()
-            {
-                AuthenticationSettings = new OrkesAuthenticationSettings("8bea4294-e16d-4437-85f0-327c29a1378c", "skZjhMzNNNm9EJDLLxD6JKYs6ADHqQ0xh1iUCqm6mOoCktHn")
-            };
+            var configuration = new Configuration();
             var host = WorkflowTaskHost.CreateWorkerHost(configuration, LogLevel.Information, new SimpleTask1());
             var ct = new CancellationTokenSource();
             await host.StartAsync(ct.Token);
@@ -32,11 +29,7 @@ namespace csharp_examples
         /// </summary>
         public async void RunSimpleTask()
         {
-            var configuration = new Configuration()
-            {
-                AuthenticationSettings = new OrkesAuthenticationSettings("8bea4294-e16d-4437-85f0-327c29a1378c", "skZjhMzNNNm9EJDLLxD6JKYs6ADHqQ0xh1iUCqm6mOoCktHn")
-            };
-
+            var configuration = new Configuration();
             var host = WorkflowTaskHost.CreateWorkerHost(configuration, LogLevel.Information, new SimpleTask1());
             var ct = new CancellationTokenSource();
             await host.StartAsync();
