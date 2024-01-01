@@ -62,7 +62,7 @@ namespace Conductor.Definition
             return this;
         }
 
-        public ConductorWorkflow WithOwner(string ownerEmail)
+        public ConductorWorkflow WithOwnerEmail(string ownerEmail)
         {
             OwnerEmail = ownerEmail;
             return this;

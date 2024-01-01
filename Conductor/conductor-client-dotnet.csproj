@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageIconUrl />
     <RepositoryUrl>https://github.com/swift-conductor/conductor-client-dotnet</RepositoryUrl>
-    <Description>C# sdk for conductor</Description>
+    <Description>Swift Conductor Client SDK for .NET</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>

@@ -10,12 +10,6 @@ namespace Conductor.Client
     public interface IReadableConfiguration
     {
         /// <summary>
-        /// Gets the access token.
-        /// </summary>
-        /// <value>Access token.</value>
-        string AccessToken { get; }
-
-        /// <summary>
         /// Gets the base path.
         /// </summary>
         /// <value>Base path.</value>

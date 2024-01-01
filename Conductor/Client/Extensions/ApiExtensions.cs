@@ -1,6 +1,5 @@
 using Conductor.Api;
 using Conductor.Executor;
-using Conductor.Client.Authentication;
 using System;
 using System.Diagnostics;
 
@@ -9,9 +8,6 @@ namespace Conductor.Client.Extensions
     public class ApiExtensions
     {
         private const string ENV_ROOT_URI = "CONDUCTOR_SERVER_URL";
-        private const string ENV_KEY_ID = "KEY";
-        private const string ENV_SECRET = "SECRET";
-
         public static Configuration Configuration { get; set; }
 
         static ApiExtensions()
@@ -19,7 +15,7 @@ namespace Conductor.Client.Extensions
             Configuration = new Configuration
             {
                 Timeout = 30 * 1000,
-                BasePath = GetEnvironmentVariable(ENV_ROOT_URI),
+                BasePath = GetEnvironmentVariable(ENV_ROOT_URI) ?? "http://localhost:8080/api",
             };
         }
 
@@ -51,7 +47,6 @@ namespace Conductor.Client.Extensions
         private static string GetEnvironmentVariable(string variable)
         {
             string value = Environment.GetEnvironmentVariable(variable);
-            Debug.Assert(value != null);
             return value;
         }
     }
