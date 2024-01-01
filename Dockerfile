@@ -10,11 +10,7 @@ FROM csharp-sdk AS build
 RUN dotnet build *.csproj
 
 FROM build as test
-ARG KEY
-ARG SECRET
 ARG CONDUCTOR_SERVER_URL
-ENV KEY=${KEY}
-ENV SECRET=${SECRET}
 ENV CONDUCTOR_SERVER_URL=${CONDUCTOR_SERVER_URL}
 COPY /Tests /package/Tests
 WORKDIR /package/Tests

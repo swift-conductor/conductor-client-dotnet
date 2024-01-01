@@ -29,6 +29,7 @@ namespace Tests.Worker
         public async System.Threading.Tasks.Task TestWorkflowAsyncExecution()
         {
             var workflow = GetConductorWorkflow();
+
             ApiExtensions.GetWorkflowExecutor().RegisterWorkflow(workflow, true);
             var workflowIdList = await StartWorkflows(workflow, quantity: 35);
             await ExecuteWorkflowTasks(workflowCompletionTimeout: TimeSpan.FromSeconds(20));
@@ -37,10 +38,13 @@ namespace Tests.Worker
 
         private ConductorWorkflow GetConductorWorkflow()
         {
-            return new ConductorWorkflow()
+            var workflow = new ConductorWorkflow()
                 .WithName(WORKFLOW_NAME)
                 .WithVersion(WORKFLOW_VERSION)
+                .WithOwnerEmail("test@test.com")
                 .WithTask(new SimpleTask(TASK_NAME, TASK_NAME));
+
+            return workflow;
         }
 
         private async System.Threading.Tasks.Task<ConcurrentBag<string>> StartWorkflows(ConductorWorkflow workflow, int quantity)

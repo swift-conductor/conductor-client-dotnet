@@ -6,6 +6,7 @@ Operator and System tasks are handled by the Conductor server, while user define
 Worker framework provides features such as polling threads, metrics and server communication.
 
 ### Design Principles for Workers
+
 Each worker embodies design pattern and follows certain basic principles:
 
 1. Workers are stateless and do not implement a workflow specific logic. 
@@ -14,6 +15,7 @@ Each worker embodies design pattern and follows certain basic principles:
 4. Workers do not implement the logic to handle retries etc, that is taken care by the Conductor server.
 
 ### Creating Task Workers
+
 Example worker
 
 ```csharp
@@ -36,6 +38,7 @@ public class SimpleWorker : IWorkflowTask
 ```
 
 ## Starting Workers
+
 You can use `WorkflowTaskHost` to create a worker host, it requires a configuration object and then you can add your workers.
 
 ```csharp
@@ -48,7 +51,7 @@ await host.startAsync();
 Thread.Sleep(TimeSpan.FromSeconds(100));
 ```
 
-Check out our [integration tests](https://github.com/swift-conductor/conductor-client-dotnet/blob/92c7580156a89322717c94aeaea9e5201fe577eb/Tests/Worker/WorkerTests.cs#L37) for more examples
+Check out our [integration tests](https://github.com/swift-conductor/conductor-client-dotnet/blob/main/Tests/Worker/WorkerTests.cs) for more examples
 
 Worker SDK collects the following metrics:
 

@@ -124,22 +124,26 @@ namespace Conductor.Client.Worker
                 + $", domain: {_workerSettings.Domain}"
                 + $", batchSize: {_workerSettings.BatchSize}"
             );
+
             var availableWorkerCounter = _workerSettings.BatchSize - _workflowTaskMonitor.GetRunningWorkers();
             if (availableWorkerCounter < 1)
             {
                 throw new Exception("no worker available");
             }
+            
             var tasks = _taskClient.PollTask(_worker.TaskType, _workerSettings.WorkerId, _workerSettings.Domain, availableWorkerCounter);
             if (tasks == null)
             {
                 tasks = new List<Models.Task>();
             }
+
             _logger.LogTrace(
                 $"[{_workerSettings.WorkerId}] Polled {tasks.Count} tasks"
                 + $", taskType: {_worker.TaskType}"
                 + $", domain: {_workerSettings.Domain}"
                 + $", batchSize: {_workerSettings.BatchSize}"
             );
+            
             return tasks;
         }
 

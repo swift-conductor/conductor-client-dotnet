@@ -1,5 +1,4 @@
-﻿using Conductor.Client.Authentication;
-using Conductor.Client.Extensions;
+﻿using Conductor.Client.Extensions;
 using Conductor.Client;
 using csharp.examples;
 using Microsoft.Extensions.Logging;

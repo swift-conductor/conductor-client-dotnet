@@ -1,5 +1,4 @@
 using Conductor.Api;
-using Conductor.Client.Authentication;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -71,10 +70,6 @@ namespace Conductor.Client
         private string _dateTimeFormat = ISO8601_DATETIME_FORMAT;
         private string _tempFolderPath = Path.GetTempPath();
 
-        private readonly TokenHandler _tokenHandler = new TokenHandler();
-
-        private TokenResourceApi _tokenClient = null;
-
         #endregion Private Members
 
         #region Constructors
@@ -127,23 +122,6 @@ namespace Conductor.Client
             set
             {
                 ApiClient.RestClient.Timeout = value;
-            }
-        }
-
-        public string AccessToken
-        {
-            get
-            {
-                if (AuthenticationSettings is null)
-                {
-                    return null;
-                }
-
-                if (_tokenClient == null)
-                {
-                    _tokenClient = GetClient<TokenResourceApi>();
-                }
-                return _tokenHandler.GetToken(AuthenticationSettings, _tokenClient);
             }
         }
 

@@ -13,7 +13,7 @@ namespace Tests.Definition
         private const string WORKFLOW_NAME = "test-sdk-csharp-workflow";
         private const int WORKFLOW_VERSION = 1;
         private const string WORKFLOW_DESCRIPTION = "Test SDK C# Workflow";
-        private const string WORKFLOW_OWNER_EMAIL = "test@test";
+        private const string WORKFLOW_OWNER_EMAIL = "test@test.com";
         private const string WORKFLOW_INPUT_PARAMETER = "number";
         private const string TASK_NAME = "test-sdk-csharp-task";
 
@@ -31,8 +31,10 @@ namespace Tests.Definition
             {
                 try
                 {
+                    var workflow = GetConductorWorkflow();    
+
                     _workflowExecutor.RegisterWorkflow(
-                        workflow: GetConductorWorkflow(),
+                        workflow: workflow,
                         overwrite: true
                     );
                     return;
@@ -51,7 +53,7 @@ namespace Tests.Definition
                 .WithVersion(WORKFLOW_VERSION)
                 .WithDescription(WORKFLOW_DESCRIPTION)
                 .WithInputParameter(WORKFLOW_INPUT_PARAMETER)
-                .WithOwner(WORKFLOW_OWNER_EMAIL)
+                .WithOwnerEmail(WORKFLOW_OWNER_EMAIL)
                     .WithTask(GetSimpleTask())
                     .WithTask(GetSubWorkflowTask())
                     .WithTask(GetHttpTask())

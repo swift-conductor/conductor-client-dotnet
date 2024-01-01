@@ -12,7 +12,7 @@ ConductorWorkflow GetConductorWorkflow()
     return new ConductorWorkflow()
         .WithName("my_first_workflow")
         .WithVersion(1)
-        .WithOwner("hello@swiftsoftwaregroup.com")
+        .WithOwnerEmail("test@test.com")
             .WithTask(new SimpleTask("simple_task_2", "simple_task_1"))
             .WithTask(new SimpleTask("simple_task_1", "simple_task_2"));
 }
@@ -20,6 +20,7 @@ ConductorWorkflow GetConductorWorkflow()
 var configuration = new Configuration();
 
 var conductorWorkflow = GetConductorWorkflow();
+
 var workflowExecutor = new WorkflowExecutor(configuration);
 workflowExecutor.RegisterWorkflow(
     workflow: conductorWorkflow
