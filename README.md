@@ -40,8 +40,8 @@ workflowClient.StartWorkflow(
 
 ## Create and run task workers 
 
-[Create and run task workers](https://github.com/swift-conductor/swift-conductor-client/blob/main/docs/readme/workers.md)
+[Create and run task workers](https://github.com/swift-conductor/conductor-client-dotnet/blob/main/docs/readme/workers.md)
 
 ## Create and Execute Workflows 
 
-[Create and Execute Workflows](https://github.com/swift-conductor/swift-conductor-client/blob/main/docs/readme/workflow.md)
+[Create and Execute Workflows](https://github.com/swift-conductor/conductor-client-dotnet/blob/main/docs/readme/workflow.md)
