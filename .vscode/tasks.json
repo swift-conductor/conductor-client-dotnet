@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/conductor-client-dotnet.sln",
+                "${workspaceFolder}/swift-conductor-client.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary",
             ],

@@ -1,37 +1,32 @@
-# Swift Conductor client SDK for .NET
+# Swift Conductor Client for .NET
 
-The conductor-client-dotnet repository provides the client SDKs to build task workers in C#.
+## ⭐ Swift Conductor
 
-Building the task workers in C# mainly consists of the following steps:
+Show support for Swift Conductor.  Please help spread the awareness by starring Swift Conductor repo.
 
-1. Setup `conductor-client-dotnet` package
+[![GitHub stars](https://img.shields.io/github/stars/swift-conductor/conductor.svg?style=social&label=Star&maxAge=)](https://GitHub.com/swift-conductor/conductor/)
+
+Client usage:
+
+1. Setup `swift-conductor-client` package
 2. Create and run task workers
 3. Create workflows using code
 4. API Documentation
 
-## ⭐ Swift Conductor
+## Install Swift Conductor Client Package​
 
-Show support for Swift Conductor.  Please help spread the awareness by starring Conductor repo.
-
-[![GitHub stars](https://img.shields.io/github/stars/swift-conductor/conductor.svg?style=social&label=Star&maxAge=)](https://GitHub.com/swift-conductor/conductor/)
-
-   
-### Setup Conductor C# Package​
-
-```shell
-dotnet add package conductor-client-dotnet
+```sh
+dotnet add package swift-conductor-client
 ```
 
-## Configurations
-
-### Configure API Client
+## Configure API Client
 
 ```csharp
-using Conductor.Api;
-using Conductor.Client;
+using SwiftConductor.Api;
+using SwiftConductor.Client;
 
 var configuration = new Configuration() {
-    BasePath = basePath,
+    BasePath = "http://localhost:8080",
 };
 
 var workflowClient = configuration.GetClient<WorkflowResourceApi>();
@@ -43,4 +38,10 @@ workflowClient.StartWorkflow(
 )
 ```
 
-### Next: [Create and run task workers](https://github.com/swift-conductor/conductor-client-dotnet/blob/main/docs/readme/workers.md)
+## Create and run task workers 
+
+[Create and run task workers](https://github.com/swift-conductor/swift-conductor-client/blob/main/docs/readme/workers.md)
+
+## Create and Execute Workflows 
+
+[Create and Execute Workflows](https://github.com/swift-conductor/swift-conductor-client/blob/main/docs/readme/workflow.md)

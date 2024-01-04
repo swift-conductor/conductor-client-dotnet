@@ -1,7 +1,9 @@
-﻿using Conductor.Client.Extensions;
-using Conductor.Client;
+﻿using Microsoft.Extensions.Logging;
+
+using SwiftConductor.Client;
+using SwiftConductor.Client.Worker;
+
 using csharp.examples;
-using Microsoft.Extensions.Logging;
 
 namespace csharp_examples
 {
@@ -14,10 +16,10 @@ namespace csharp_examples
         public async void RunMultiSimpleTask()
         {
             var configuration = new Configuration();
-            var host = WorkflowTaskHost.CreateWorkerHost(configuration, LogLevel.Information, new SimpleTask1());
+            var host = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new SimpleTask1());
             var ct = new CancellationTokenSource();
             await host.StartAsync(ct.Token);
-            var host1 = WorkflowTaskHost.CreateWorkerHost(configuration, LogLevel.Information, new SimpleTask2());
+            var host1 = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new SimpleTask2());
             var ct1 = new CancellationTokenSource();
             await host1.StartAsync(ct.Token);
             Thread.Sleep(TimeSpan.FromSeconds(100)); // after 100 seconds will stop the service
@@ -29,7 +31,7 @@ namespace csharp_examples
         public async void RunSimpleTask()
         {
             var configuration = new Configuration();
-            var host = WorkflowTaskHost.CreateWorkerHost(configuration, LogLevel.Information, new SimpleTask1());
+            var host = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new SimpleTask1());
             var ct = new CancellationTokenSource();
             await host.StartAsync();
             Thread.Sleep(TimeSpan.FromSeconds(100)); // after 100 seconds will stop the service

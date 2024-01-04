@@ -7,7 +7,7 @@ Worker framework provides features such as polling threads, metrics and server c
 
 ### Design Principles for Workers
 
-Each worker embodies design pattern and follows certain basic principles:
+Worker implementation should follow certain design principles:
 
 1. Workers are stateless and do not implement a workflow specific logic. 
 2. Each worker executes a very specific task and produces well-defined output given specific inputs. 
@@ -19,35 +19,43 @@ Each worker embodies design pattern and follows certain basic principles:
 Example worker
 
 ```csharp
-public class SimpleWorker : IWorkflowTask
+public class SimpleWorker : IWorker
 {
     public string TaskType { get; }
-    public WorkflowTaskExecutorConfiguration WorkerSettings { get; }
+    public WorkerSettings WorkerSettings { get; }
 
     public SimpleWorker(string taskType = "test-sdk-csharp-task")
     {
         TaskType = taskType;
-        WorkerSettings = new WorkflowTaskExecutorConfiguration();
+        WorkerSettings = new WorkerSettings();
     }
 
-    public TaskResult Execute(Task task)
+    public async Task<WorkerTaskResult> Run(SwiftConductor.Client.Models.WorkerTask workerTask, CancellationToken token)
     {
-        return task.Completed();
+        if (token != CancellationToken.None && token.IsCancellationRequested)
+            return workerTask.Failed("Cancellation token request");
+
+        return await System.Threading.Tasks.Task.Run(() => workerTask.Completed());
     }
 }
 ```
 
 ## Starting Workers
 
-You can use `WorkflowTaskHost` to create a worker host, it requires a configuration object and then you can add your workers.
+You can use `WorkerHosting` to create a worker host, it requires a configuration object and then you can add your workers.
 
 ```csharp
-using Conductor.Client.Worker;
 using System;
 using System.Threading.Thread;
 
-var host = WorkflowTaskHost.CreateWorkerHost(configuration, new SimpleWorker());
+using SwiftConductor.Client;
+using SwiftConductor.Client.Worker;
+
+var configuration = new Configuration();
+
+var host = WorkerHosting.CreateWorkerHost(configuration, new SimpleWorker());
 await host.startAsync();
+
 Thread.Sleep(TimeSpan.FromSeconds(100));
 ```
 
@@ -68,4 +76,3 @@ Worker SDK collects the following metrics:
 
 Metrics on client side supplements the one collected from server in identifying the network as well as client side issues.
 
-### Next: [Create and Execute Workflows](https://github.com/swift-conductor/conductor-client-dotnet/blob/main/docs/readme/workflow.md)

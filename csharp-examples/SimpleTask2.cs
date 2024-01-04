@@ -1,32 +1,27 @@
-﻿using Conductor.Client.Interfaces;
-using Conductor.Client.Models;
-using Conductor.Client.Worker;
-using Conductor.Client.Extensions;
+﻿using SwiftConductor.Client.Interfaces;
+using SwiftConductor.Client.Models;
+using SwiftConductor.Client.Worker;
+using SwiftConductor.Client.Extensions;
 
 namespace csharp.examples
 {
-    public class SimpleTask2 : IWorkflowTask
+    public class SimpleTask2 : IWorker
     {
         public string TaskType { get; }
-        public WorkflowTaskExecutorConfiguration WorkerSettings { get; }
+        public WorkerSettings WorkerSettings { get; }
 
         public SimpleTask2(string taskType = "SimpleTask_2")
         {
             TaskType = taskType;
-            WorkerSettings = new WorkflowTaskExecutorConfiguration();
+            WorkerSettings = new WorkerSettings();
         }
 
-        public async Task<TaskResult> Execute(Conductor.Client.Models.Task task, CancellationToken token)
+        public async Task<WorkerTaskResult> Run(SwiftConductor.Client.Models.WorkerTask workerTask, CancellationToken token)
         {
             if (token != CancellationToken.None && token.IsCancellationRequested)
-                return task.Failed("Token request Cancel");
+                return workerTask.Failed("Token request Cancel");
 
-            return await System.Threading.Tasks.Task.Run(() => task.Completed());
-        }
-
-        public TaskResult Execute(Conductor.Client.Models.Task task)
-        {
-            throw new NotImplementedException();
+            return await System.Threading.Tasks.Task.Run(() => workerTask.Completed());
         }
     }
 }

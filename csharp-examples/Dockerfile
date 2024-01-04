@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["csharp-examples/csharp-examples.csproj", "csharp-examples/"]
-COPY ["Conductor/conductor-client-dotnet.csproj", "Conductor/"]
+COPY ["swift-conductor-client/swift-conductor-client.csproj", "swift-conductor-client/"]
 RUN dotnet restore "./csharp-examples/./csharp-examples.csproj"
 COPY . .
 WORKDIR "/src/csharp-examples"
