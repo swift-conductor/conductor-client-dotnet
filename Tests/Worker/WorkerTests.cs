@@ -1,8 +1,8 @@
-using Conductor.Api;
-using Conductor.Client.Extensions;
-using Conductor.Client.Models;
-using Conductor.Definition;
-using Conductor.Definition.TaskType;
+using SwiftConductor.Api;
+using SwiftConductor.Client.Extensions;
+using SwiftConductor.Client.Models;
+using SwiftConductor.Client.Worker;
+using SwiftConductor.Definition;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -30,15 +30,15 @@ namespace Tests.Worker
         {
             var workflow = GetConductorWorkflow();
 
-            ApiExtensions.GetWorkflowExecutor().RegisterWorkflow(workflow, true);
+            ApiExtensions.GetWorkflowManager().RegisterWorkflow(workflow, true);
             var workflowIdList = await StartWorkflows(workflow, quantity: 35);
             await ExecuteWorkflowTasks(workflowCompletionTimeout: TimeSpan.FromSeconds(20));
             await ValidateWorkflowCompletion(workflowIdList.ToArray());
         }
 
-        private ConductorWorkflow GetConductorWorkflow()
+        private SwiftConductor.Definition.WorkflowDefEx GetConductorWorkflow()
         {
-            var workflow = new ConductorWorkflow()
+            var workflow = new SwiftConductor.Definition.WorkflowDefEx()
                 .WithName(WORKFLOW_NAME)
                 .WithVersion(WORKFLOW_VERSION)
                 .WithOwnerEmail("test@test.com")
@@ -47,7 +47,7 @@ namespace Tests.Worker
             return workflow;
         }
 
-        private async System.Threading.Tasks.Task<ConcurrentBag<string>> StartWorkflows(ConductorWorkflow workflow, int quantity)
+        private async System.Threading.Tasks.Task<ConcurrentBag<string>> StartWorkflows(SwiftConductor.Definition.WorkflowDefEx workflow, int quantity)
         {
             var startWorkflowRequest = workflow.GetStartWorkflowRequest();
             startWorkflowRequest.TaskToDomain = new Dictionary<string, string> { { TASK_NAME, TASK_DOMAIN } };
@@ -62,8 +62,8 @@ namespace Tests.Worker
 
         private async System.Threading.Tasks.Task ExecuteWorkflowTasks(TimeSpan workflowCompletionTimeout)
         {
-            var host = WorkflowTaskHost.CreateWorkerHost(Microsoft.Extensions.Logging.LogLevel.Debug);
-            host = WorkflowTaskHost.CreateWorkerHost(Microsoft.Extensions.Logging.LogLevel.Debug, new ClassWorker());
+            var host = WorkerHosting.CreateWorkerHost(Microsoft.Extensions.Logging.LogLevel.Debug);
+            host = WorkerHosting.CreateWorkerHost(Microsoft.Extensions.Logging.LogLevel.Debug, new ClassWorker());
             await host.StartAsync();
             Thread.Sleep(workflowCompletionTimeout);
             await host.StopAsync();

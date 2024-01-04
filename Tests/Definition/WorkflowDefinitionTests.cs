@@ -1,10 +1,10 @@
-using Conductor.Client.Extensions;
-using Conductor.Client.Models;
-using Conductor.Definition;
-using Conductor.Definition.TaskType;
-using Conductor.Executor;
 using System;
 using Xunit;
+
+using SwiftConductor.Client;
+using SwiftConductor.Client.Extensions;
+using SwiftConductor.Client.Models;
+using SwiftConductor.Definition;
 
 namespace Tests.Definition
 {
@@ -17,11 +17,11 @@ namespace Tests.Definition
         private const string WORKFLOW_INPUT_PARAMETER = "number";
         private const string TASK_NAME = "test-sdk-csharp-task";
 
-        private WorkflowExecutor _workflowExecutor = null;
+        private WorkflowManager _workflowManager = null;
 
         public WorkflowDefTests()
         {
-            _workflowExecutor = ApiExtensions.GetWorkflowExecutor();
+            _workflowManager = ApiExtensions.GetWorkflowManager();
         }
 
         [Fact]
@@ -33,22 +33,22 @@ namespace Tests.Definition
                 {
                     var workflow = GetConductorWorkflow();    
 
-                    _workflowExecutor.RegisterWorkflow(
+                    _workflowManager.RegisterWorkflow(
                         workflow: workflow,
                         overwrite: true
                     );
                     return;
                 }
-                catch (Conductor.Client.ApiException)
+                catch (SwiftConductor.Client.ApiException)
                 {
                     System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1 << i));
                 }
             }
         }
 
-        private ConductorWorkflow GetConductorWorkflow()
+        private SwiftConductor.Definition.WorkflowDefEx GetConductorWorkflow()
         {
-            return new ConductorWorkflow()
+            return new SwiftConductor.Definition.WorkflowDefEx()
                 .WithName(WORKFLOW_NAME)
                 .WithVersion(WORKFLOW_VERSION)
                 .WithDescription(WORKFLOW_DESCRIPTION)

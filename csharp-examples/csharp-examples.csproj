@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Conductor\conductor-client-dotnet.csproj" />
+    <ProjectReference Include="..\swift-conductor-client\swift-conductor-client.csproj" />
   </ItemGroup>
 
 </Project>

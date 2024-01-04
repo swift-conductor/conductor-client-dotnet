@@ -17,9 +17,9 @@ WORKDIR /package/Tests
 RUN dotnet test -l "console;verbosity=normal"
 
 FROM build as pack_release
-COPY /README.md /package/Conductor/README.md
+COPY /README.md /package/swift-conductor-client/README.md
 ARG SDK_VERSION
-RUN dotnet pack "conductor-client-dotnet.csproj" \
+RUN dotnet pack "swift-conductor-client.csproj" \
     -o /build \
     --include-symbols \
     --include-source \

@@ -3,13 +3,12 @@
 ## A simple two-step workflow
 
 ```csharp
-using Conductor.Client;
-using Conductor.Definition;
-using Conductor.Executor;
+using SwiftConductor.Client;
+using SwiftConductor.Definition;
 
-ConductorWorkflow GetConductorWorkflow()
+WorkflowDefEx CreateWorkflowDef()
 {
-    return new ConductorWorkflow()
+    return new WorkflowDefEx()
         .WithName("my_first_workflow")
         .WithVersion(1)
         .WithOwnerEmail("test@test.com")
@@ -18,18 +17,10 @@ ConductorWorkflow GetConductorWorkflow()
 }
 
 var configuration = new Configuration();
+var workflowManager = new WorkflowManager(configuration);
 
-var conductorWorkflow = GetConductorWorkflow();
+var workflowDef = CreateWorkflowDef();
+workflowManager.RegisterWorkflow(workflow: workflowDef, overwrite: true);
 
-var workflowExecutor = new WorkflowExecutor(configuration);
-workflowExecutor.RegisterWorkflow(
-    workflow: conductorWorkflow
-    overwrite: true
-);
-var workflowId = workflowExecutor.StartWorkflow(conductorWorkflow);
+var workflowId = workflowManager.StartWorkflow(workflowDefinition);
 ```
-
-### More Examples
-You can find more examples at the following GitHub repository:
-
-https://github.com/swift-conductor/conductor-examples
