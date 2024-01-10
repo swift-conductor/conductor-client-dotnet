@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace SwiftConductor.Definition
 {
-    public class ForkJoinTask : WorkflowTaskEx
+    public class ForkJoinTask : WorkflowTask
     {
-        public ForkJoinTask(string taskReferenceName, params WorkflowTask[][] forkTasks) : base(taskReferenceName, WorkflowTask.WorkflowTaskTypeEnum.FORKJOIN)
+        public ForkJoinTask(string taskReferenceName, params WorkflowTask[][] forkTasks) : 
+            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.FORKJOIN)
         {
             ForkTasks = new List<List<WorkflowTask>>();
             foreach (WorkflowTask[] forkTask in forkTasks)

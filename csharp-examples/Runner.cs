@@ -13,13 +13,13 @@ namespace csharp_examples
         /// <summary>
         /// Running multiple task as background services
         /// </summary>
-        public async void RunMultiSimpleTask()
+        public async void RunMultiCustomTask()
         {
             var configuration = new Configuration();
-            var host = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new SimpleTask1());
+            var host = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new CustomTask1());
             var ct = new CancellationTokenSource();
             await host.StartAsync(ct.Token);
-            var host1 = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new SimpleTask2());
+            var host1 = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new CustomTask2());
             var ct1 = new CancellationTokenSource();
             await host1.StartAsync(ct.Token);
             Thread.Sleep(TimeSpan.FromSeconds(100)); // after 100 seconds will stop the service
@@ -28,10 +28,10 @@ namespace csharp_examples
         /// <summary>
         /// Run single task as background service
         /// </summary>
-        public async void RunSimpleTask()
+        public async void RunCustomTask()
         {
             var configuration = new Configuration();
-            var host = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new SimpleTask1());
+            var host = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new CustomTask1());
             var ct = new CancellationTokenSource();
             await host.StartAsync();
             Thread.Sleep(TimeSpan.FromSeconds(100)); // after 100 seconds will stop the service

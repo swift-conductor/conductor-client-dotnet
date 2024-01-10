@@ -5,13 +5,14 @@ using Newtonsoft.Json;
 
 namespace SwiftConductor.Definition
 {
-    public class HttpTask : WorkflowTaskEx
+    public class HttpTask : WorkflowTask
     {
         private static string HTTP_PARAMETER = "http_request";
 
-        public HttpTask(string taskReferenceName, HttpTaskSettings input = default(HttpTaskSettings)) : base(taskReferenceName, WorkflowTask.WorkflowTaskTypeEnum.HTTP)
+        public HttpTask(string taskReferenceName, HttpTaskSettings input = default(HttpTaskSettings)) : 
+            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.HTTP)
         {
-            WithInput(HTTP_PARAMETER, input.ToDictionary());
+            InputParameters.Add(HTTP_PARAMETER, input.ToDictionary());
         }
     }
 

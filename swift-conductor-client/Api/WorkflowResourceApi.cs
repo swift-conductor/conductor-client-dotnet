@@ -365,7 +365,7 @@ namespace SwiftConductor.Api
         /// <returns>ApiResponse of string</returns>
         ApiResponse<string> RerunWithHttpInfo(RerunWorkflowRequest body, string workflowId);
         /// <summary>
-        /// Resets callback times of all non-terminal SIMPLE tasks to 0
+        /// Resets callback times of all non-terminal CUSTOM tasks to 0
         /// </summary>
         /// <remarks>
         /// 
@@ -376,7 +376,7 @@ namespace SwiftConductor.Api
         void ResetWorkflow(string workflowId);
 
         /// <summary>
-        /// Resets callback times of all non-terminal SIMPLE tasks to 0
+        /// Resets callback times of all non-terminal CUSTOM tasks to 0
         /// </summary>
         /// <remarks>
         /// 
@@ -1849,7 +1849,7 @@ namespace SwiftConductor.Api
         }
 
         /// <summary>
-        /// Resets callback times of all non-terminal SIMPLE tasks to 0 
+        /// Resets callback times of all non-terminal CUSTOM tasks to 0 
         /// </summary>
         /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="workflowId"></param>
@@ -1860,7 +1860,7 @@ namespace SwiftConductor.Api
         }
 
         /// <summary>
-        /// Resets callback times of all non-terminal SIMPLE tasks to 0 
+        /// Resets callback times of all non-terminal CUSTOM tasks to 0 
         /// </summary>
         /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="workflowId"></param>

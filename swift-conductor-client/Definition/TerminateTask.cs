@@ -2,22 +2,25 @@ using SwiftConductor.Client.Models;
 
 namespace SwiftConductor.Definition
 {
-    public class TerminateTask : WorkflowTaskEx
+    public class TerminateTask : WorkflowTask
     {
         private static string WORKFLOW_ID_PARAMETER = "workflowId";
         private static string TERMINATION_REASON_PARAMETER = "terminationReason";
         private static string TERMINATION_STATUS_PARAMETER = "terminationStatus";
 
-        public TerminateTask(string taskReferenceName, WorkflowStatus.StatusEnum terminationStatus = WorkflowStatus.StatusEnum.FAILED, string workflowId = null, string terminationReason = null) : base(taskReferenceName, WorkflowTask.WorkflowTaskTypeEnum.TERMINATE)
+        public TerminateTask(string taskReferenceName, WorkflowStatus.StatusEnum terminationStatus = WorkflowStatus.StatusEnum.FAILED, string workflowId = null, string terminationReason = null) : 
+            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.TERMINATE)
         {
-            WithInput(TERMINATION_STATUS_PARAMETER, terminationStatus);
+            InputParameters.Add(TERMINATION_STATUS_PARAMETER, terminationStatus);
+            
             if (workflowId != null)
             {
-                WithInput(WORKFLOW_ID_PARAMETER, workflowId);
+                InputParameters.Add(WORKFLOW_ID_PARAMETER, workflowId);
             }
+
             if (terminationReason != null)
             {
-                WithInput(TERMINATION_REASON_PARAMETER, terminationReason);
+                InputParameters.Add(TERMINATION_REASON_PARAMETER, terminationReason);
             }
         }
     }

@@ -6,14 +6,14 @@
 using SwiftConductor.Client;
 using SwiftConductor.Definition;
 
-WorkflowDefEx CreateWorkflowDef()
+WorkflowDef CreateWorkflowDef()
 {
-    return new WorkflowDefEx()
+    return new WorkflowBuilder()
         .WithName("my_first_workflow")
         .WithVersion(1)
         .WithOwnerEmail("test@test.com")
-            .WithTask(new SimpleTask("simple_task_2", "simple_task_1"))
-            .WithTask(new SimpleTask("simple_task_1", "simple_task_2"));
+            .WithTask(new CustomTask("custom_task_2", "custom_task_1"))
+            .WithTask(new CustomTask("custom_task_1", "custom_task_2"));
 }
 
 var configuration = new Configuration();
@@ -22,5 +22,6 @@ var workflowManager = new WorkflowManager(configuration);
 var workflowDef = CreateWorkflowDef();
 workflowManager.RegisterWorkflow(workflow: workflowDef, overwrite: true);
 
-var workflowId = workflowManager.StartWorkflow(workflowDefinition);
+var startWorkflowRequest = workflowDef.GetStartWorkflowRequest();
+var workflowId = workflowManager.StartWorkflow();
 ```

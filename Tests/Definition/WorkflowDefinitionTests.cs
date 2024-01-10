@@ -46,32 +46,36 @@ namespace Tests.Definition
             }
         }
 
-        private SwiftConductor.Definition.WorkflowDefEx GetConductorWorkflow()
+        private SwiftConductor.Definition.WorkflowBuilder GetConductorWorkflow()
         {
-            return new SwiftConductor.Definition.WorkflowDefEx()
+            return new SwiftConductor.Definition.WorkflowBuilder()
                 .WithName(WORKFLOW_NAME)
                 .WithVersion(WORKFLOW_VERSION)
                 .WithDescription(WORKFLOW_DESCRIPTION)
                 .WithInputParameter(WORKFLOW_INPUT_PARAMETER)
                 .WithOwnerEmail(WORKFLOW_OWNER_EMAIL)
-                    .WithTask(GetSimpleTask())
-                    .WithTask(GetSubWorkflowTask())
-                    .WithTask(GetHttpTask())
-                    .WithTask(GetForkJoinTask())
-                    .WithTask(GetJavascriptTask())
-                    .WithTask(GetDoWhileTask())
-                    .WithTask(GetEventTask())
-                    .WithTask(GetJQTask())
-                    .WithTask(GetSwitchTask())
-                    .WithTask(GetWaitTask())
-                    .WithTask(GetSetVariableTask())
-                    .WithTask(GetTerminateTask())
-            ;
+                .WithTasks(
+                    GetCustomTask(),
+                    GetSubWorkflowTask(),
+                    GetHttpTask())
+                .WithTasks(    
+                    GetForkJoinTask()
+                )
+                .WithTasks(
+                    GetJavascriptTask(),
+                    GetDoWhileTask(),
+                    GetEventTask(),
+                    GetJQTask(),
+                    GetSwitchTask(),
+                    GetWaitTask(),
+                    GetSetVariableTask(),
+                    GetTerminateTask()
+                );
         }
 
-        private WorkflowTask GetSimpleTask(string taskReferenceName = TASK_NAME)
+        private WorkflowTask GetCustomTask(string taskReferenceName = TASK_NAME)
         {
-            return new SimpleTask(taskReferenceName, taskReferenceName);
+            return new CustomTask(taskReferenceName, taskReferenceName);
         }
 
         private WorkflowTask GetHttpTask(string taskReferenceName = "http_task_reference_name")
@@ -103,8 +107,9 @@ namespace Tests.Definition
 
         private WorkflowTask GetSetVariableTask(string taskReferenceName = "set_variable_task_reference_name")
         {
-            return new SetVariableTask(taskReferenceName)
-                .WithInput("variable_name", "variable_content");
+            var workflowTask = new SetVariableTask(taskReferenceName);
+            workflowTask.InputParameters.Add("variable_name", "variable_content");
+            return workflowTask;
         }
 
         private WorkflowTask GetDoWhileTask(string taskReferenceName = "do_while_task_reference_name")
@@ -164,26 +169,23 @@ namespace Tests.Definition
 
         private WorkflowTask GetSwitchTask(string taskReferenceName = "switch_task_reference_name")
         {
-            return new SwitchTask
-            (
+            var switchTask = new SwitchTask(
                 taskReferenceName: taskReferenceName,
                 caseExpression: "$.variable < 15 ? 'LONG':'LONG'",
                 useJavascript: true
-            ).WithDecisionCase
-            (
+            ).WithDecisionCase(
                 key: "LONG",
                 GetWaitTask("switch_wait_inner_task_reference_name")
-            ).WithDecisionCase
-            (
+            ).WithDecisionCase(
                 key: "SHORT",
                 GetTerminateTask("switch_terminate_inner_task_reference_name")
-            ).WithDefaultCase
-            (
+            ).WithDefaultCase(
                 GetHttpTask("switch_http_inner_task_reference_name")
-            ).WithInput
-            (
-                "variable", "${workflow.input." + WORKFLOW_INPUT_PARAMETER + "}"
             );
+            
+            switchTask.InputParameters.Add("variable", "${workflow.input." + WORKFLOW_INPUT_PARAMETER + "}");
+
+            return switchTask;
         }
     }
 }

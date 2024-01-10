@@ -3,14 +3,15 @@ using System.Collections.Generic;
 
 namespace SwiftConductor.Definition
 {
-    public class SwitchTask : WorkflowTaskEx
+    public class SwitchTask : WorkflowTask
     {
         private const string VALUE_PARAM_NAME = "value-param";
         private const string SWITCH_CASE_PARAM_NAME = "switchCaseValue";
 
         private const string JAVASCRIPT_PARAM_NAME = "javascript";
 
-        public SwitchTask(string taskReferenceName, string caseExpression, bool useJavascript = false) : base(taskReferenceName, WorkflowTask.WorkflowTaskTypeEnum.SWITCH)
+        public SwitchTask(string taskReferenceName, string caseExpression, bool useJavascript = false) : 
+            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.SWITCH)
         {
             DecisionCases = new Dictionary<string, List<WorkflowTask>>();
             DefaultCase = new List<WorkflowTask>();
@@ -23,7 +24,7 @@ namespace SwiftConductor.Definition
             {
                 EvaluatorType = VALUE_PARAM_NAME;
                 Expression = SWITCH_CASE_PARAM_NAME;
-                WithInput(SWITCH_CASE_PARAM_NAME, caseExpression);
+                InputParameters.Add(SWITCH_CASE_PARAM_NAME, caseExpression);
             }
         }
 

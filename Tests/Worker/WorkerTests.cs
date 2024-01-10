@@ -36,20 +36,25 @@ namespace Tests.Worker
             await ValidateWorkflowCompletion(workflowIdList.ToArray());
         }
 
-        private SwiftConductor.Definition.WorkflowDefEx GetConductorWorkflow()
+        private SwiftConductor.Definition.WorkflowBuilder GetConductorWorkflow()
         {
-            var workflow = new SwiftConductor.Definition.WorkflowDefEx()
+            var workflow = new SwiftConductor.Definition.WorkflowBuilder()
                 .WithName(WORKFLOW_NAME)
                 .WithVersion(WORKFLOW_VERSION)
                 .WithOwnerEmail("test@test.com")
-                .WithTask(new SimpleTask(TASK_NAME, TASK_NAME));
+                .WithTasks(new CustomTask(TASK_NAME, TASK_NAME));
 
             return workflow;
         }
 
-        private async System.Threading.Tasks.Task<ConcurrentBag<string>> StartWorkflows(SwiftConductor.Definition.WorkflowDefEx workflow, int quantity)
+        private async System.Threading.Tasks.Task<ConcurrentBag<string>> StartWorkflows(WorkflowDef workflow, int quantity)
         {
-            var startWorkflowRequest = workflow.GetStartWorkflowRequest();
+            var startWorkflowRequest = new StartWorkflowRequest(
+                name: workflow.Name,
+                version: workflow.Version,
+                workflowDef: workflow
+            );
+
             startWorkflowRequest.TaskToDomain = new Dictionary<string, string> { { TASK_NAME, TASK_DOMAIN } };
             var startedWorkflows = await WorkflowExtensions.StartWorkflows(
                 _workflowClient,

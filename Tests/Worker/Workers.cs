@@ -20,7 +20,7 @@ namespace Tests.Worker
 
         // Polls for 5 task every 200ms
         [Worker("test-sdk-csharp-task", 5, "taskDomain", 200, "workerId")]
-        public static WorkerTaskResult SimpleWorker(SwiftConductor.Client.Models.WorkerTask task)
+        public static WorkerTaskResult CustomWorker(SwiftConductor.Client.Models.WorkerTask task)
         {
             return task.Completed();
         }

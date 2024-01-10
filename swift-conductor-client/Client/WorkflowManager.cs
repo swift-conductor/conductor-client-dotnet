@@ -33,11 +33,6 @@ namespace SwiftConductor.Client
             }
         }
 
-        public string StartWorkflow(Definition.WorkflowDefEx conductorWorkflow)
-        {
-            return StartWorkflow(conductorWorkflow.GetStartWorkflowRequest());
-        }
-
         public string StartWorkflow(StartWorkflowRequest startWorkflowRequest)
         {
             return _workflowClient.StartWorkflow(startWorkflowRequest);

@@ -23,10 +23,10 @@ namespace SwiftConductor.Client.Models
         public enum WorkflowTaskTypeEnum
         {
             /// <summary>
-            /// Enum SIMPLE for value: SIMPLE
+            /// Enum CUSTOM for value: CUSTOM
             /// </summary>
-            [EnumMember(Value = "SIMPLE")]
-            SIMPLE = 1,
+            [EnumMember(Value = "CUSTOM")]
+            CUSTOM = 1,
             /// <summary>
             /// Enum DYNAMIC for value: DYNAMIC
             /// </summary>
@@ -171,7 +171,37 @@ namespace SwiftConductor.Client.Models
         /// <param name="taskReferenceName">taskReferenceName (required).</param>
         /// <param name="type">type.</param>
         /// <param name="workflowTaskType">workflowTaskType.</param>
-        public WorkflowTask(bool? asyncComplete = default(bool?), string caseExpression = default(string), string caseValueParam = default(string), Dictionary<string, List<WorkflowTask>> decisionCases = default(Dictionary<string, List<WorkflowTask>>), List<WorkflowTask> defaultCase = default(List<WorkflowTask>), List<string> defaultExclusiveJoinTask = default(List<string>), string description = default(string), string dynamicForkJoinTasksParam = default(string), string dynamicForkTasksInputParamName = default(string), string dynamicForkTasksParam = default(string), string dynamicTaskNameParam = default(string), string evaluatorType = default(string), string expression = default(string), List<List<WorkflowTask>> forkTasks = default(List<List<WorkflowTask>>), Dictionary<string, Object> inputParameters = default(Dictionary<string, Object>), List<string> joinOn = default(List<string>), string loopCondition = default(string), List<WorkflowTask> loopOver = default(List<WorkflowTask>), string name = default(string), bool? optional = default(bool?), bool? rateLimited = default(bool?), int? retryCount = default(int?), string scriptExpression = default(string), string sink = default(string), int? startDelay = default(int?), SubWorkflowParams subWorkflowParam = default(SubWorkflowParams), TaskDef taskDefinition = default(TaskDef), string taskReferenceName = default(string), string type = default(string), WorkflowTaskTypeEnum? workflowTaskType = default(WorkflowTaskTypeEnum?))
+        public WorkflowTask(
+            bool? asyncComplete = default(bool?), 
+            string caseExpression = default(string), 
+            string caseValueParam = default(string), 
+            Dictionary<string, List<WorkflowTask>> decisionCases = default(Dictionary<string, List<WorkflowTask>>), 
+            List<WorkflowTask> defaultCase = default(List<WorkflowTask>), 
+            List<string> defaultExclusiveJoinTask = default(List<string>), 
+            string description = default(string), 
+            string dynamicForkJoinTasksParam = default(string), 
+            string dynamicForkTasksInputParamName = default(string), 
+            string dynamicForkTasksParam = default(string), 
+            string dynamicTaskNameParam = default(string), 
+            string evaluatorType = default(string), 
+            string expression = default(string), 
+            List<List<WorkflowTask>> forkTasks = default(List<List<WorkflowTask>>), 
+            Dictionary<string, Object> inputParameters = default(Dictionary<string, Object>), 
+            List<string> joinOn = default(List<string>), 
+            string loopCondition = default(string), 
+            List<WorkflowTask> loopOver = default(List<WorkflowTask>), 
+            string name = default(string), 
+            bool? optional = default(bool?), 
+            bool? rateLimited = default(bool?), 
+            int? retryCount = default(int?), 
+            string scriptExpression = default(string), 
+            string sink = default(string), 
+            int? startDelay = default(int?), 
+            SubWorkflowParams subWorkflowParam = default(SubWorkflowParams), 
+            TaskDef taskDefinition = default(TaskDef), 
+            string taskReferenceName = default(string), 
+            string type = default(string), 
+            WorkflowTaskTypeEnum? workflowTaskType = default(WorkflowTaskTypeEnum?))
         {
             // to ensure "name" is required (not null)
             if (name == null)

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace SwiftConductor.Definition
 {
-    public class JoinTask : WorkflowTaskEx
+    public class JoinTask : WorkflowTask
     {
-        public JoinTask(string taskReferenceName, params WorkflowTask[] joinOn) : base(taskReferenceName, WorkflowTask.WorkflowTaskTypeEnum.JOIN)
+        public JoinTask(string taskReferenceName, params WorkflowTask[] joinOn) : 
+            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.JOIN)
         {
             JoinOn = new List<string>();
             foreach (WorkflowTask forkTask in joinOn)

@@ -3,39 +3,39 @@ using System.Collections.Generic;
 
 namespace SwiftConductor.Definition
 {
-    public class WorkflowDefEx : WorkflowDef
+    public class WorkflowBuilder : WorkflowDef
     {
-        public WorkflowDefEx() : base(name: "", tasks: new List<WorkflowTask>(), timeoutSeconds: 0)
+        public WorkflowBuilder() : base(name: "", tasks: new List<WorkflowTask>(), timeoutSeconds: 0)
         {
             InputParameters = new List<string>();
         }
 
-        public WorkflowDefEx WithName(string name)
+        public WorkflowBuilder WithName(string name)
         {
             Name = name;
             return this;
         }
 
-        public WorkflowDefEx WithVersion(int version)
+        public WorkflowBuilder WithVersion(int version)
         {
             Version = version;
             return this;
         }
 
-        public WorkflowDefEx WithDescription(string description)
+        public WorkflowBuilder WithDescription(string description)
         {
             Description = description;
             return this;
         }
 
-        public WorkflowDefEx WithTimeoutPolicy(WorkflowDef.TimeoutPolicyEnum timeoutPolicy, int timeoutSeconds)
+        public WorkflowBuilder WithTimeoutPolicy(WorkflowDef.TimeoutPolicyEnum timeoutPolicy, int timeoutSeconds)
         {
             TimeoutPolicy = timeoutPolicy;
             TimeoutSeconds = timeoutSeconds;
             return this;
         }
 
-        public WorkflowDefEx WithTask(params WorkflowTask[] tasks)
+        public WorkflowBuilder WithTasks(params WorkflowTask[] tasks)
         {
             foreach (WorkflowTask task in tasks)
             {
@@ -44,42 +44,34 @@ namespace SwiftConductor.Definition
             return this;
         }
 
-        public WorkflowDefEx WithFailureWorkflow(string failureWorkflow)
+        public WorkflowBuilder WithFailureWorkflow(string failureWorkflow)
         {
             FailureWorkflow = failureWorkflow;
             return this;
         }
 
-        public WorkflowDefEx WithRestartable(bool restartable)
+        public WorkflowBuilder WithRestartable(bool restartable)
         {
             Restartable = restartable;
             return this;
         }
 
-        public WorkflowDefEx WithOutputParameter(string key, object value)
+        public WorkflowBuilder WithOutputParameter(string key, object value)
         {
             OutputParameters.Add(key, value);
             return this;
         }
 
-        public WorkflowDefEx WithOwnerEmail(string ownerEmail)
+        public WorkflowBuilder WithOwnerEmail(string ownerEmail)
         {
             OwnerEmail = ownerEmail;
             return this;
         }
 
-        public WorkflowDefEx WithInputParameter(string key)
+        public WorkflowBuilder WithInputParameter(string key)
         {
             InputParameters.Add(key);
             return this;
-        }
-
-        public StartWorkflowRequest GetStartWorkflowRequest()
-        {
-            return new StartWorkflowRequest(
-                name: Name,
-                version: Version
-            );
         }
     }
 }

@@ -7,7 +7,7 @@ class Program
         Runner runner = new Runner();
 
         // call specific method based on testing scenario
-        runner.RunMultiSimpleTask();
-        //runner.RunSimpleTask();
+        runner.RunMultiCustomTask();
+        //runner.RunCustomTask();
     }
 }

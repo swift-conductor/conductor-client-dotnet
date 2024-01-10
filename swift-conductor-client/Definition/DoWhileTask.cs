@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace SwiftConductor.Definition
 {
-    public class DoWhileTask : WorkflowTaskEx
+    public class DoWhileTask : WorkflowTask
     {
-        public DoWhileTask(string taskReferenceName, string loopCondition, params WorkflowTask[] loopOver) : base(taskReferenceName, WorkflowTask.WorkflowTaskTypeEnum.DOWHILE)
+        public DoWhileTask(string taskReferenceName, string loopCondition, params WorkflowTask[] loopOver) : 
+            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.DOWHILE)
         {
             LoopCondition = loopCondition;
             LoopOver = new List<WorkflowTask>(loopOver);

@@ -19,12 +19,12 @@ Worker implementation should follow certain design principles:
 Example worker
 
 ```csharp
-public class SimpleWorker : IWorker
+public class CustomWorker : IWorker
 {
     public string TaskType { get; }
     public WorkerSettings WorkerSettings { get; }
 
-    public SimpleWorker(string taskType = "test-sdk-csharp-task")
+    public CustomWorker(string taskType = "test-sdk-csharp-task")
     {
         TaskType = taskType;
         WorkerSettings = new WorkerSettings();
@@ -53,7 +53,7 @@ using SwiftConductor.Client.Worker;
 
 var configuration = new Configuration();
 
-var host = WorkerHosting.CreateWorkerHost(configuration, new SimpleWorker());
+var host = WorkerHosting.CreateWorkerHost(configuration, new CustomWorker());
 await host.startAsync();
 
 Thread.Sleep(TimeSpan.FromSeconds(100));
