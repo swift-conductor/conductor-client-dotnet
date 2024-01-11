@@ -30,12 +30,12 @@ public class CustomWorker : IWorker
         WorkerSettings = new WorkerSettings();
     }
 
-    public async Task<WorkerTaskResult> Run(SwiftConductor.Client.Models.WorkerTask workerTask, CancellationToken token)
+    public async Task<WorkerTaskResult> Run(WorkerTask workerTask, CancellationToken token)
     {
         if (token != CancellationToken.None && token.IsCancellationRequested)
             return workerTask.Failed("Cancellation token request");
 
-        return await System.Threading.Tasks.Task.Run(() => workerTask.Completed());
+        return await Task.Run(() => workerTask.Completed());
     }
 }
 ```
