@@ -24,9 +24,9 @@ public class CustomWorker : IWorker
     public string TaskType { get; }
     public WorkerSettings WorkerSettings { get; }
 
-    public CustomWorker(string taskType = "test-sdk-csharp-task-type")
+    public CustomWorker()
     {
-        TaskType = taskType;
+        TaskType = "custom_task_type";
         WorkerSettings = new WorkerSettings();
     }
 
@@ -54,9 +54,11 @@ using SwiftConductor.Client.Worker;
 var configuration = new Configuration();
 
 var host = WorkerHost.Create(configuration, new CustomWorker());
-await host.startAsync();
 
-Thread.Sleep(TimeSpan.FromSeconds(100));
+await host.startAsync();
+Thread.Sleep(TimeSpan.FromSeconds(60));
+
+await host.StopAsync();
 ```
 
 Check out our [integration tests](https://github.com/swift-conductor/conductor-client-dotnet/blob/main/Tests/Worker/WorkerTests.cs) for more examples
@@ -75,4 +77,3 @@ Worker SDK collects the following metrics:
 | task_result_size   | Records output payload size of a task        | taskType                         |
 
 Metrics on client side supplements the one collected from server in identifying the network as well as client side issues.
-

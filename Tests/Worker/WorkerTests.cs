@@ -49,7 +49,7 @@ namespace Tests.Worker
         private List<TaskDef> CreateTaskDefs()
         {
             return new List<TaskDef>() { 
-                new TaskDef(name: TASK_TYPE, timeoutSeconds: -1, ownerEmail: "tets@test.com") 
+                new TaskDef(name: TASK_TYPE, timeoutSeconds: -1, ownerEmail: "test@test.com") 
             };
         }
 
