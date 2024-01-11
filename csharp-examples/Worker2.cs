@@ -5,12 +5,12 @@ using SwiftConductor.Client.Extensions;
 
 namespace csharp.examples
 {
-    public class CustomTask2 : IWorker
+    public class Worker2 : IWorker
     {
         public string TaskType { get; }
         public WorkerSettings WorkerSettings { get; }
 
-        public CustomTask2(string taskType = "CustomTask_2")
+        public Worker2(string taskType = "CustomTask_2")
         {
             TaskType = taskType;
             WorkerSettings = new WorkerSettings();

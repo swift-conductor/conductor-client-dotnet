@@ -21,17 +21,17 @@ namespace Tests.Definition
 
         public WorkflowDefTests()
         {
-            _workflowManager = ApiExtensions.GetWorkflowManager();
+            _workflowManager = Conductor.GetWorkflowManager();
         }
 
         [Fact]
-        public void TestKitchenSinkWorkflow()
+        public void TestWorkflowAllTaskTypes()
         {
             for (int i = 0; i < 3; i += 1)
             {
                 try
                 {
-                    var workflow = GetConductorWorkflow();    
+                    var workflow = GetWorkflowDef();    
 
                     _workflowManager.RegisterWorkflow(
                         workflow: workflow,
@@ -39,16 +39,16 @@ namespace Tests.Definition
                     );
                     return;
                 }
-                catch (SwiftConductor.Client.ApiException)
+                catch (ApiException)
                 {
                     System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1 << i));
                 }
             }
         }
 
-        private SwiftConductor.Definition.WorkflowBuilder GetConductorWorkflow()
+        private WorkflowDef GetWorkflowDef()
         {
-            return new SwiftConductor.Definition.WorkflowBuilder()
+            return new WorkflowBuilder()
                 .WithName(WORKFLOW_NAME)
                 .WithVersion(WORKFLOW_VERSION)
                 .WithDescription(WORKFLOW_DESCRIPTION)
@@ -62,7 +62,7 @@ namespace Tests.Definition
                     GetForkJoinTask()
                 )
                 .WithTasks(
-                    GetJavascriptTask(),
+                    GetInlineTask(),
                     GetDoWhileTask(),
                     GetEventTask(),
                     GetJQTask(),
@@ -116,7 +116,7 @@ namespace Tests.Definition
         {
             return new LoopTask
             (
-                taskReferenceName: taskReferenceName,
+                taskReferenceName: taskReferenceName, 
                 iterations: 5,
                 GetWaitTask("do_while_wait_inner_task_reference_name")
             );
@@ -126,7 +126,7 @@ namespace Tests.Definition
         {
             return new SubWorkflowTask
             (
-                taskReferenceName: taskReferenceName,
+                taskReferenceName: taskReferenceName, 
                 subWorkflowParams: new SubWorkflowParams
                 (
                     name: "test-sdk-java-workflow"
@@ -140,7 +140,7 @@ namespace Tests.Definition
             {
                 new ForkJoinTask
                 (
-                    taskReferenceName: taskReferenceName,
+                    taskReferenceName: taskReferenceName, 
                     new WorkflowTask[]
                     {
                         GetSetVariableTask("fork_join_set_variable_inner_task_reference_name"),
@@ -159,10 +159,10 @@ namespace Tests.Definition
             };
         }
 
-        private WorkflowTask GetJavascriptTask(string taskReferenceName = "javascript_task_reference_name")
+        private WorkflowTask GetInlineTask(string taskReferenceName = "inline_task_reference_name")
         {
-            return new JavascriptTask(
-                taskReferenceName: taskReferenceName,
+            return new InlineTask(
+                taskReferenceName: taskReferenceName, 
                 script: "{ key3: (.key1.value1 + .key2.value2) }"
             );
         }
@@ -170,7 +170,7 @@ namespace Tests.Definition
         private WorkflowTask GetSwitchTask(string taskReferenceName = "switch_task_reference_name")
         {
             var switchTask = new SwitchTask(
-                taskReferenceName: taskReferenceName,
+                taskReferenceName: taskReferenceName, 
                 caseExpression: "$.variable < 15 ? 'LONG':'LONG'",
                 useJavascript: true
             ).WithDecisionCase(

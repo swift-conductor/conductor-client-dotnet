@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SwiftConductor.Client.Worker
 {
-    public class Worker : IWorker
+    public class GenericWorker : IWorker
     {
         public string TaskType { get; }
         public WorkerSettings WorkerSettings { get; }
@@ -14,7 +14,7 @@ namespace SwiftConductor.Client.Worker
         private readonly object _workerInstance;
         private readonly MethodInfo _executeTaskMethod;
 
-        public Worker(string taskType, WorkerSettings workerSettings, MethodInfo executeTaskMethod, object workerInstance = null)
+        public GenericWorker(string taskType, WorkerSettings workerSettings, MethodInfo executeTaskMethod, object workerInstance = null)
         {
             TaskType = taskType;
             WorkerSettings = workerSettings;
@@ -22,13 +22,19 @@ namespace SwiftConductor.Client.Worker
             _workerInstance = workerInstance;
         }
 
-        public async Task<WorkerTaskResult> Run(Models.WorkerTask task, CancellationToken token)
+        public async Task<WorkerTaskResult> Run(WorkerTask task, CancellationToken token)
         {
 
             if (token != CancellationToken.None && token.IsCancellationRequested)
-                return new WorkerTaskResult() { Status = WorkerTaskResult.StatusEnum.FAILED, ReasonForIncompletion = "Token Requested Cancel" };
+                return new WorkerTaskResult() { 
+                    Status = WorkerTaskResult.StatusEnum.FAILED, 
+                    ReasonForIncompletion = "Token Requested Cancel" 
+                };
 
-            var taskResult = await System.Threading.Tasks.Task.Run(() => _executeTaskMethod.Invoke(_workerInstance, new object[] { task }));
+            var taskResult = await System.Threading.Tasks.Task.Run(() => 
+                _executeTaskMethod.Invoke(_workerInstance, new object[] { task })
+            );
+            
             return (WorkerTaskResult)taskResult;
         }
     }

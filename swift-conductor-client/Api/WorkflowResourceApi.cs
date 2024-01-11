@@ -190,31 +190,7 @@ namespace SwiftConductor.Api
         /// <param name="endTime"> (optional)</param>
         /// <returns>ApiResponse of List&lt;string&gt;</returns>
         ApiResponse<List<string>> GetRunningWorkflowWithHttpInfo(string name, int? version = null, long? startTime = null, long? endTime = null);
-        /// <summary>
-        /// Gets the workflow by workflow id
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="workflowId"></param>
-        /// <param name="includeOutput"> (optional, default to false)</param>
-        /// <param name="includeVariables"> (optional, default to false)</param>
-        /// <returns>WorkflowStatus</returns>
-        WorkflowStatus GetWorkflowStatusSummary(string workflowId, bool? includeOutput = null, bool? includeVariables = null);
 
-        /// <summary>
-        /// Gets the workflow by workflow id
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="workflowId"></param>
-        /// <param name="includeOutput"> (optional, default to false)</param>
-        /// <param name="includeVariables"> (optional, default to false)</param>
-        /// <returns>ApiResponse of WorkflowStatus</returns>
-        ApiResponse<WorkflowStatus> GetWorkflowStatusSummaryWithHttpInfo(string workflowId, bool? includeOutput = null, bool? includeVariables = null);
         /// <summary>
         /// Lists workflows for the given correlation id list
         /// </summary>
@@ -1194,7 +1170,7 @@ namespace SwiftConductor.Api
             if (payloadType == null)
                 throw new ApiException(400, "Missing required parameter 'payloadType' when calling WorkflowResourceApi->GetExternalStorageLocation");
 
-            var localVarPath = "/workflow/externalstoragelocation";
+            var localVarPath = "/workflow/external-storage-location";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1309,77 +1285,6 @@ namespace SwiftConductor.Api
             return new ApiResponse<List<string>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
                 (List<string>)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<string>)));
-        }
-
-        /// <summary>
-        /// Gets the workflow by workflow id 
-        /// </summary>
-        /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="workflowId"></param>
-        /// <param name="includeOutput"> (optional, default to false)</param>
-        /// <param name="includeVariables"> (optional, default to false)</param>
-        /// <returns>WorkflowStatus</returns>
-        public WorkflowStatus GetWorkflowStatusSummary(string workflowId, bool? includeOutput = null, bool? includeVariables = null)
-        {
-            ApiResponse<WorkflowStatus> localVarResponse = GetWorkflowStatusSummaryWithHttpInfo(workflowId, includeOutput, includeVariables);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Gets the workflow by workflow id 
-        /// </summary>
-        /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="workflowId"></param>
-        /// <param name="includeOutput"> (optional, default to false)</param>
-        /// <param name="includeVariables"> (optional, default to false)</param>
-        /// <returns>ApiResponse of WorkflowStatus</returns>
-        public ApiResponse<WorkflowStatus> GetWorkflowStatusSummaryWithHttpInfo(string workflowId, bool? includeOutput = null, bool? includeVariables = null)
-        {
-            // verify the required parameter 'workflowId' is set
-            if (workflowId == null)
-                throw new ApiException(400, "Missing required parameter 'workflowId' when calling WorkflowResourceApi->GetWorkflowStatusSummary");
-
-            var localVarPath = "/workflow/{workflowId}/status";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "*/*"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            if (workflowId != null) localVarPathParams.Add("workflowId", this.Configuration.ApiClient.ParameterToString(workflowId)); // path parameter
-            if (includeOutput != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "includeOutput", includeOutput)); // query parameter
-            if (includeVariables != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "includeVariables", includeVariables)); // query parameter
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("GetWorkflowStatusSummary", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<WorkflowStatus>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (WorkflowStatus)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(WorkflowStatus)));
         }
 
         /// <summary>

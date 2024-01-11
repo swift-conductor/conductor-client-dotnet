@@ -24,7 +24,7 @@ public class CustomWorker : IWorker
     public string TaskType { get; }
     public WorkerSettings WorkerSettings { get; }
 
-    public CustomWorker(string taskType = "test-sdk-csharp-task")
+    public CustomWorker(string taskType = "test-sdk-csharp-task-type")
     {
         TaskType = taskType;
         WorkerSettings = new WorkerSettings();
@@ -42,7 +42,7 @@ public class CustomWorker : IWorker
 
 ## Starting Workers
 
-You can use `WorkerHosting` to create a worker host, it requires a configuration object and then you can add your workers.
+You can use `WorkerHost` to create a worker host, it requires a configuration object and then you can add your workers.
 
 ```csharp
 using System;
@@ -53,7 +53,7 @@ using SwiftConductor.Client.Worker;
 
 var configuration = new Configuration();
 
-var host = WorkerHosting.CreateWorkerHost(configuration, new CustomWorker());
+var host = WorkerHost.Create(configuration, new CustomWorker());
 await host.startAsync();
 
 Thread.Sleep(TimeSpan.FromSeconds(100));

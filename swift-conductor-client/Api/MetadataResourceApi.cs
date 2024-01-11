@@ -21,9 +21,8 @@ namespace SwiftConductor.Api
         /// </remarks>
         /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
-        /// <param name="overwrite"> (optional, default to false)</param>
         /// <returns>Object</returns>
-        Object Create(WorkflowDef body, bool? overwrite = null);
+        Object Create(WorkflowDef body);
 
         /// <summary>
         /// Create a new workflow definition
@@ -33,9 +32,8 @@ namespace SwiftConductor.Api
         /// </remarks>
         /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
-        /// <param name="overwrite"> (optional, default to false)</param>
         /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> CreateWithHttpInfo(WorkflowDef body, bool? overwrite = null);
+        ApiResponse<Object> CreateWithHttpInfo(WorkflowDef body);
         /// <summary>
         /// Retrieves workflow definition along with blueprint
         /// </summary>
@@ -149,7 +147,7 @@ namespace SwiftConductor.Api
         /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>Object</returns>
-        Object RegisterTaskDef(List<TaskDef> body);
+        Object RegisterTaskDefs(List<TaskDef> body);
 
         /// <summary>
         /// Create or update task definition(s)
@@ -160,7 +158,7 @@ namespace SwiftConductor.Api
         /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> RegisterTaskDefWithHttpInfo(List<TaskDef> body);
+        ApiResponse<Object> RegisterTaskDefsWithHttpInfo(List<TaskDef> body);
         /// <summary>
         /// Remove a task definition
         /// </summary>
@@ -352,11 +350,10 @@ namespace SwiftConductor.Api
         /// </summary>
         /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
-        /// <param name="overwrite"> (optional, default to false)</param>
         /// <returns>Object</returns>
-        public Object Create(WorkflowDef body, bool? overwrite = null)
+        public Object Create(WorkflowDef body)
         {
-            ApiResponse<Object> localVarResponse = CreateWithHttpInfo(body, overwrite);
+            ApiResponse<Object> localVarResponse = CreateWithHttpInfo(body);
             return localVarResponse.Data;
         }
 
@@ -367,7 +364,7 @@ namespace SwiftConductor.Api
         /// <param name="body"></param>
         /// <param name="overwrite"> (optional, default to false)</param>
         /// <returns>ApiResponse of Object</returns>
-        public ApiResponse<Object> CreateWithHttpInfo(WorkflowDef body, bool? overwrite = null)
+        public ApiResponse<Object> CreateWithHttpInfo(WorkflowDef body)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -395,7 +392,6 @@ namespace SwiftConductor.Api
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (overwrite != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "overwrite", overwrite)); // query parameter
             if (body != null && body.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
@@ -713,9 +709,9 @@ namespace SwiftConductor.Api
         /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>Object</returns>
-        public Object RegisterTaskDef(List<TaskDef> body)
+        public Object RegisterTaskDefs(List<TaskDef> body)
         {
-            ApiResponse<Object> localVarResponse = RegisterTaskDefWithHttpInfo(body);
+            ApiResponse<Object> localVarResponse = RegisterTaskDefsWithHttpInfo(body);
             return localVarResponse.Data;
         }
 
@@ -725,7 +721,7 @@ namespace SwiftConductor.Api
         /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>ApiResponse of Object</returns>
-        public ApiResponse<Object> RegisterTaskDefWithHttpInfo(List<TaskDef> body)
+        public ApiResponse<Object> RegisterTaskDefsWithHttpInfo(List<TaskDef> body)
         {
             // verify the required parameter 'body' is set
             if (body == null)

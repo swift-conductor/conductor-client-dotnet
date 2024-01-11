@@ -5,7 +5,8 @@ namespace SwiftConductor.Definition
 {
     public class CustomTask : WorkflowTask
     {
-        public CustomTask(string taskName, string taskReferenceName) : base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTaskTypeEnum.CUSTOM) 
+        public CustomTask(string taskName, string taskReferenceName) : 
+            base(name: taskName, taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTaskTypeEnum.CUSTOM) 
         {
             Name = taskName;
         }

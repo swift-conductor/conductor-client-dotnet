@@ -12,8 +12,8 @@ WorkflowDef CreateWorkflowDef()
         .WithName("my_first_workflow")
         .WithVersion(1)
         .WithOwnerEmail("test@test.com")
-            .WithTask(new CustomTask("custom_task_2", "custom_task_1"))
-            .WithTask(new CustomTask("custom_task_1", "custom_task_2"));
+            .WithTask(new CustomTask("custom_task_1", "custom_task_1"))
+            .WithTask(new CustomTask("custom_task_2", "custom_task_2"));
 }
 
 var configuration = new Configuration();

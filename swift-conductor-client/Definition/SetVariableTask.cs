@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using SwiftConductor.Client.Models;
 
 namespace SwiftConductor.Definition
@@ -5,6 +6,6 @@ namespace SwiftConductor.Definition
     public class SetVariableTask : WorkflowTask
     {
         public SetVariableTask(string taskReferenceName) : 
-            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.SETVARIABLE) { }
+            base(name: taskReferenceName, taskReferenceName: taskReferenceName, inputParameters: new Dictionary<string, object>(), workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.SETVARIABLE) { }
     }
 }

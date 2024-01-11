@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SwiftConductor.Client.Extensions
 {
-    public static class SystemTaskExtensions
+    public static class ThreadingTaskExtensions
     {
         public static async Task<T> WaitOrCancel<T>(this Task<T> task, CancellationToken token)
         {

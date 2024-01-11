@@ -11,7 +11,7 @@ namespace SwiftConductor.Definition
         private const string JAVASCRIPT_PARAM_NAME = "javascript";
 
         public SwitchTask(string taskReferenceName, string caseExpression, bool useJavascript = false) : 
-            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.SWITCH)
+            base(name: taskReferenceName, taskReferenceName: taskReferenceName, inputParameters: new Dictionary<string, object>(), workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.SWITCH)
         {
             DecisionCases = new Dictionary<string, List<WorkflowTask>>();
             DefaultCase = new List<WorkflowTask>();

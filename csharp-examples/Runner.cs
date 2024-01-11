@@ -13,28 +13,33 @@ namespace csharp_examples
         /// <summary>
         /// Running multiple task as background services
         /// </summary>
-        public async void RunMultiCustomTask()
+        public async void RunMultipleWorkers()
         {
             var configuration = new Configuration();
-            var host = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new CustomTask1());
-            var ct = new CancellationTokenSource();
-            await host.StartAsync(ct.Token);
-            var host1 = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new CustomTask2());
+            var host1 = WorkerHost.Create(configuration, LogLevel.Information, new Worker1());
             var ct1 = new CancellationTokenSource();
-            await host1.StartAsync(ct.Token);
-            Thread.Sleep(TimeSpan.FromSeconds(100)); // after 100 seconds will stop the service
+            await host1.StartAsync(ct1.Token);
+
+            var host2 = WorkerHost.Create(configuration, LogLevel.Information, new Worker2());
+            var ct2 = new CancellationTokenSource();
+            await host2.StartAsync(ct1.Token);
+            
+            Thread.Sleep(TimeSpan.FromSeconds(100)); // will stop the service after 1 minute
         }
 
         /// <summary>
         /// Run single task as background service
         /// </summary>
-        public async void RunCustomTask()
+        public async void RunOneWorker()
         {
             var configuration = new Configuration();
-            var host = WorkerHosting.CreateWorkerHost(configuration, LogLevel.Information, new CustomTask1());
+            
+            var host = WorkerHost.Create(configuration, LogLevel.Information, new Worker1());
+            
             var ct = new CancellationTokenSource();
-            await host.StartAsync();
-            Thread.Sleep(TimeSpan.FromSeconds(100)); // after 100 seconds will stop the service
+            await host.StartAsync(ct.Token);
+            
+            Thread.Sleep(TimeSpan.FromSeconds(60)); // will stop the service after 1 minute 
         }
     }
 }

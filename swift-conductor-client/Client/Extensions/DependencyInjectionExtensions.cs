@@ -27,13 +27,14 @@ namespace SwiftConductor.Client.Extensions
         {
             services.AddHttpClient();
             services.AddOptions();
+
             if (configuration == null)
-            {
                 configuration = new Configuration();
-            }
+
             services.AddSingleton<Configuration>(configuration);
             services.AddSingleton<IWorkerClient, WorkerHttpClient>();
             services.AddTransient<IWorkerManager, WorkerManager>();
+
             return services;
         }
 

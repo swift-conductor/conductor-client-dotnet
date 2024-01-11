@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using SwiftConductor.Client.Models;
 
 namespace SwiftConductor.Definition
@@ -9,7 +10,7 @@ namespace SwiftConductor.Definition
         private static string TERMINATION_STATUS_PARAMETER = "terminationStatus";
 
         public TerminateTask(string taskReferenceName, WorkflowStatus.StatusEnum terminationStatus = WorkflowStatus.StatusEnum.FAILED, string workflowId = null, string terminationReason = null) : 
-            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.TERMINATE)
+            base(name: taskReferenceName, taskReferenceName: taskReferenceName, inputParameters: new Dictionary<string, object>(), workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.TERMINATE)
         {
             InputParameters.Add(TERMINATION_STATUS_PARAMETER, terminationStatus);
             

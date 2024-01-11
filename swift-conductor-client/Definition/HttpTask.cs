@@ -10,7 +10,7 @@ namespace SwiftConductor.Definition
         private static string HTTP_PARAMETER = "http_request";
 
         public HttpTask(string taskReferenceName, HttpTaskSettings input = default(HttpTaskSettings)) : 
-            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.HTTP)
+            base(name: taskReferenceName, taskReferenceName: taskReferenceName, inputParameters: new Dictionary<string, object>(), workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.HTTP)
         {
             InputParameters.Add(HTTP_PARAMETER, input.ToDictionary());
         }

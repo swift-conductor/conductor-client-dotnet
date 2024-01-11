@@ -6,13 +6,13 @@ namespace SwiftConductor.Definition
     public class SubWorkflowTask : WorkflowTask
     {
         public SubWorkflowTask(string taskReferenceName, SubWorkflowParams subWorkflowParams) : 
-            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.SUBWORKFLOW)
+            base(name: taskReferenceName, taskReferenceName: taskReferenceName, inputParameters: new Dictionary<string, object>(), workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.SUBWORKFLOW)
         {
             SubWorkflowParam = subWorkflowParams;
         }
 
         public SubWorkflowTask(string taskReferenceName, WorkflowDef workflow, Dictionary<string, string> taskToDomain = default(Dictionary<string, string>)) : 
-            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.SUBWORKFLOW)
+            base(name: taskReferenceName, taskReferenceName: taskReferenceName, inputParameters: new Dictionary<string, object>(), workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.SUBWORKFLOW)
         {
             SubWorkflowParam = new SubWorkflowParams
             (

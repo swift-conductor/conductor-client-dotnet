@@ -11,7 +11,7 @@ namespace SwiftConductor.Client.Worker
     internal class WorkerManager : IWorkerManager
     {
         private readonly ILogger<WorkerManager> _logger;
-        private readonly ILogger<WorkerRunner> _loggerWorkflowTaskExecutor;
+        private readonly ILogger<WorkerRunner> _loggerWorkerRunner;
         private readonly ILogger<WorkerMonitor> _loggerWorkflowTaskMonitor;
         private readonly HashSet<IWorkerRunner> _workers;
         private readonly IWorkerClient _client;
@@ -21,7 +21,7 @@ namespace SwiftConductor.Client.Worker
             _logger = logger;
             _client = client;
             _workers = new HashSet<IWorkerRunner>();
-            _loggerWorkflowTaskExecutor = loggerWorkflowTaskExecutor;
+            _loggerWorkerRunner = loggerWorkflowTaskExecutor;
             _loggerWorkflowTaskMonitor = loggerWorkflowTaskMonitor;
         }
 
@@ -31,13 +31,14 @@ namespace SwiftConductor.Client.Worker
                 token.ThrowIfCancellationRequested();
 
             _logger.LogDebug("Starting workers...");
-            DiscoverWorkers();
+
             var runningWorkers = new List<Task>();
             foreach (var worker in _workers)
             {
                 var runningWorker = worker.Start(token);
                 runningWorkers.Add(runningWorker);
             }
+
             _logger.LogDebug("Started all workers");
             await Task.WhenAll(runningWorkers);
         }
@@ -45,47 +46,14 @@ namespace SwiftConductor.Client.Worker
         public void RegisterWorker(IWorker worker)
         {
             var workflowTaskMonitor = new WorkerMonitor(_loggerWorkflowTaskMonitor);
-            var workflowTaskExecutor = new WorkerRunner(
-                _loggerWorkflowTaskExecutor,
+            var workerRunner = new WorkerRunner(
+                _loggerWorkerRunner,
                 _client,
                 worker,
                 workflowTaskMonitor
             );
-            _workers.Add(workflowTaskExecutor);
-        }
 
-        private void DiscoverWorkers()
-        {
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                foreach (var type in assembly.GetTypes())
-                {
-                    if (type.GetCustomAttribute<WorkerAttribute>() == null)
-                    {
-                        continue;
-                    }
-                    foreach (var method in type.GetMethods())
-                    {
-                        var workerTask = method.GetCustomAttribute<WorkerAttribute>();
-                        if (workerTask == null)
-                        {
-                            continue;
-                        }
-                        object workerInstance = null;
-                        if (!method.IsStatic)
-                        {
-                            workerInstance = Activator.CreateInstance(type);
-                        }
-                        var worker = new Worker(
-                            workerTask.TaskType,
-                            workerTask.WorkerSettings,
-                            method,
-                            workerInstance
-                        );
-                        RegisterWorker(worker);
-                    }
-                }
-            }
+            _workers.Add(workerRunner);
         }
     }
 }

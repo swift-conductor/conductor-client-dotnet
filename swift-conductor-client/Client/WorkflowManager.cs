@@ -1,6 +1,8 @@
 using SwiftConductor.Api;
 using SwiftConductor.Client.Models;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace SwiftConductor.Client
 {
@@ -21,7 +23,19 @@ namespace SwiftConductor.Client
             _metadataClient = metadataClient;
         }
 
-        public void RegisterWorkflow(WorkflowDef workflow, bool overwrite)
+        public WorkflowResourceApi WorkflowClient {
+            get {
+                return _workflowClient; 
+            }
+        }
+
+        public MetadataResourceApi MetadataClient {
+            get {
+                return _metadataClient; 
+            }
+        }
+
+        public void RegisterWorkflow(WorkflowDef workflow, bool overwrite=false)
         {
             if (overwrite)
             {

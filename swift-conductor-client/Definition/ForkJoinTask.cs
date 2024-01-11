@@ -6,7 +6,7 @@ namespace SwiftConductor.Definition
     public class ForkJoinTask : WorkflowTask
     {
         public ForkJoinTask(string taskReferenceName, params WorkflowTask[][] forkTasks) : 
-            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.FORKJOIN)
+            base(name: taskReferenceName, taskReferenceName: taskReferenceName, inputParameters: new Dictionary<string, object>(), workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.FORKJOIN)
         {
             ForkTasks = new List<List<WorkflowTask>>();
             foreach (WorkflowTask[] forkTask in forkTasks)

@@ -2,14 +2,14 @@ using System;
 
 using SwiftConductor.Api;
 
-namespace SwiftConductor.Client.Extensions
+namespace SwiftConductor.Client
 {
-    public class ApiExtensions
+    public class Conductor
     {
         private const string ENV_ROOT_URI = "CONDUCTOR_SERVER_URL";
         public static Configuration Configuration { get; set; }
 
-        static ApiExtensions()
+        static Conductor()
         {
             Configuration = new Configuration
             {

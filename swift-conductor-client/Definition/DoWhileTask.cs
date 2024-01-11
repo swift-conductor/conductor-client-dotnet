@@ -6,7 +6,7 @@ namespace SwiftConductor.Definition
     public class DoWhileTask : WorkflowTask
     {
         public DoWhileTask(string taskReferenceName, string loopCondition, params WorkflowTask[] loopOver) : 
-            base(taskReferenceName: taskReferenceName, workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.DOWHILE)
+            base(name: taskReferenceName, taskReferenceName: taskReferenceName, inputParameters: new Dictionary<string, object>(), workflowTaskType: WorkflowTask.WorkflowTaskTypeEnum.DOWHILE)
         {
             LoopCondition = loopCondition;
             LoopOver = new List<WorkflowTask>(loopOver);
@@ -17,7 +17,7 @@ namespace SwiftConductor.Definition
     {
         public LoopTask(string taskReferenceName, int iterations, params WorkflowTask[] loopOver) :
             base(
-                taskReferenceName: taskReferenceName,
+                taskReferenceName: taskReferenceName, 
                 loopCondition: GetForLoopCondition(taskReferenceName, iterations),
                 loopOver: loopOver
             )
