@@ -1,0 +1,9 @@
+{
+    "targetFramework": "net6.0",
+    
+    "packageName": "SwiftConductor",
+    "packageVersion": "3.16.0",
+    
+    "optionalAssemblyInfo": "false",
+    "optionalProjectFile": "false"
+}

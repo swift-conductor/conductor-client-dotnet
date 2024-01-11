@@ -92,16 +92,15 @@ namespace Tests.Worker
 
             var incompleteWorkflowCounter = 0;
 
-            // TODO:
-            // foreach (var workflowId in workflowIdList)
-            // {
-            //     var workflow = await manager.WorkflowClient.GetWorkflow(workflowId);
-            //     if (workflow.Status != WorkflowStatus.StatusEnum.COMPLETED)
-            //     {
-            //         incompleteWorkflowCounter += 1;
-            //         Console.WriteLine($"Workflow not completed, workflowId: {workflowId}");
-            //     }
-            // }
+            foreach (var workflowId in workflowIdList)
+            {
+                var workflow = manager.WorkflowClient.GetExecutionStatus(workflowId);
+                if (workflow.Status.Value != Workflow.StatusEnum.COMPLETED)
+                {
+                    incompleteWorkflowCounter += 1;
+                    Console.WriteLine($"Workflow not completed, workflowId: {workflowId}");
+                }
+            }
 
             Assert.Equal(0, incompleteWorkflowCounter);
         }
