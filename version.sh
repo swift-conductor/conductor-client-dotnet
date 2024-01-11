@@ -1,1 +1,1 @@
-export SDK_VERSION='0.1.5'
+export SDK_VERSION='1.1.0'
