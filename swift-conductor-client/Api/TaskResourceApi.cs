@@ -494,7 +494,7 @@ namespace SwiftConductor.Api
         public ApiResponse<Dictionary<string, long?>> AllWithHttpInfo()
         {
 
-            var localVarPath = "/tasks/queue/all";
+            var localVarPath = "/task/queue/all";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -552,7 +552,7 @@ namespace SwiftConductor.Api
         public ApiResponse<Dictionary<string, Dictionary<string, Dictionary<string, long?>>>> AllVerboseWithHttpInfo()
         {
 
-            var localVarPath = "/tasks/queue/all/verbose";
+            var localVarPath = "/task/queue/all/verbose";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -623,7 +623,7 @@ namespace SwiftConductor.Api
             if (tasktype == null)
                 throw new ApiException(400, "Missing required parameter 'tasktype' when calling TaskResourceApi->BatchPoll");
 
-            var localVarPath = "/tasks/poll/batch/{tasktype}";
+            var localVarPath = "/task/poll/batch/{tasktype}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -710,7 +710,7 @@ namespace SwiftConductor.Api
         public ApiResponse<Dictionary<string, Object>> GetAllPollDataWithHttpInfo(long? workerSize = null, string workerOpt = null, long? queueSize = null, string queueOpt = null, long? lastPollTimeSize = null, string lastPollTimeOpt = null)
         {
 
-            var localVarPath = "/tasks/queue/polldata/all";
+            var localVarPath = "/task/queue/poll-data/all";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -790,7 +790,7 @@ namespace SwiftConductor.Api
             if (payloadType == null)
                 throw new ApiException(400, "Missing required parameter 'payloadType' when calling TaskResourceApi->GetExternalStorageLocation");
 
-            var localVarPath = "/tasks/externalstoragelocation";
+            var localVarPath = "/task/external-storage-location";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -857,7 +857,7 @@ namespace SwiftConductor.Api
             if (taskType == null)
                 throw new ApiException(400, "Missing required parameter 'taskType' when calling TaskResourceApi->GetPollData");
 
-            var localVarPath = "/tasks/queue/polldata";
+            var localVarPath = "/task/queue/poll-data";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -922,7 +922,7 @@ namespace SwiftConductor.Api
             if (taskId == null)
                 throw new ApiException(400, "Missing required parameter 'taskId' when calling TaskResourceApi->GetTask");
 
-            var localVarPath = "/tasks/{taskId}";
+            var localVarPath = "/task/{taskId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -987,7 +987,7 @@ namespace SwiftConductor.Api
             if (taskId == null)
                 throw new ApiException(400, "Missing required parameter 'taskId' when calling TaskResourceApi->GetTaskLogs");
 
-            var localVarPath = "/tasks/{taskId}/log";
+            var localVarPath = "/task/{taskId}/log";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1056,7 +1056,7 @@ namespace SwiftConductor.Api
             if (taskId == null)
                 throw new ApiException(400, "Missing required parameter 'taskId' when calling TaskResourceApi->Log");
 
-            var localVarPath = "/tasks/{taskId}/log";
+            var localVarPath = "/task/{taskId}/log";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1133,7 +1133,7 @@ namespace SwiftConductor.Api
             if (tasktype == null)
                 throw new ApiException(400, "Missing required parameter 'tasktype' when calling TaskResourceApi->Poll");
 
-            var localVarPath = "/tasks/poll/{tasktype}";
+            var localVarPath = "/task/poll/{tasktype}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1200,7 +1200,7 @@ namespace SwiftConductor.Api
             if (taskType == null)
                 throw new ApiException(400, "Missing required parameter 'taskType' when calling TaskResourceApi->RequeuePendingTask");
 
-            var localVarPath = "/tasks/queue/requeue/{taskType}";
+            var localVarPath = "/task/queue/requeue/{taskType}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1270,7 +1270,7 @@ namespace SwiftConductor.Api
         public ApiResponse<SearchResultTaskSummary> SearchWithHttpInfo(int? start = null, int? size = null, string sort = null, string freeText = null, string query = null)
         {
 
-            var localVarPath = "/tasks/search";
+            var localVarPath = "/task/search";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1344,7 +1344,7 @@ namespace SwiftConductor.Api
         public ApiResponse<SearchResultTask> SearchV2WithHttpInfo(int? start = null, int? size = null, string sort = null, string freeText = null, string query = null)
         {
 
-            var localVarPath = "/tasks/search-v2";
+            var localVarPath = "/task/search-v2";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1410,7 +1410,7 @@ namespace SwiftConductor.Api
         public ApiResponse<Dictionary<string, int?>> SizeWithHttpInfo(List<string> taskType = null)
         {
 
-            var localVarPath = "/tasks/queue/sizes";
+            var localVarPath = "/task/queue/sizes";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1475,7 +1475,7 @@ namespace SwiftConductor.Api
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling TaskResourceApi->UpdateTask");
 
-            var localVarPath = "/tasks";
+            var localVarPath = "/task";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1564,7 +1564,7 @@ namespace SwiftConductor.Api
             if (status == null)
                 throw new ApiException(400, "Missing required parameter 'status' when calling TaskResourceApi->UpdateTask");
 
-            var localVarPath = "/tasks/{workflowId}/{taskRefName}/{status}";
+            var localVarPath = "/task/{workflowId}/{taskRefName}/{status}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

@@ -370,7 +370,7 @@ namespace SwiftConductor.Api
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling MetadataResourceApi->Create");
 
-            var localVarPath = "/metadata/workflow";
+            var localVarPath = "/metadata/workflowdef";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -447,7 +447,7 @@ namespace SwiftConductor.Api
             if (name == null)
                 throw new ApiException(400, "Missing required parameter 'name' when calling MetadataResourceApi->Get");
 
-            var localVarPath = "/metadata/workflow/{name}";
+            var localVarPath = "/metadata/workflowdef/{name}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -519,7 +519,7 @@ namespace SwiftConductor.Api
         public ApiResponse<List<WorkflowDef>> GetAllWorkflowsWithHttpInfo(string access = null, bool? metadata = null, string tagKey = null, string tagValue = null, bool? _short = null)
         {
 
-            var localVarPath = "/metadata/workflow";
+            var localVarPath = "/metadata/workflowdef";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -590,7 +590,7 @@ namespace SwiftConductor.Api
             if (tasktype == null)
                 throw new ApiException(400, "Missing required parameter 'tasktype' when calling MetadataResourceApi->GetTaskDef");
 
-            var localVarPath = "/metadata/taskdefs/{tasktype}";
+            var localVarPath = "/metadata/taskdef/{tasktype}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -659,7 +659,7 @@ namespace SwiftConductor.Api
         public ApiResponse<List<TaskDef>> GetTaskDefsWithHttpInfo(string access = null, bool? metadata = null, string tagKey = null, string tagValue = null)
         {
 
-            var localVarPath = "/metadata/taskdefs";
+            var localVarPath = "/metadata/taskdef";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -727,7 +727,7 @@ namespace SwiftConductor.Api
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling MetadataResourceApi->RegisterTaskDef");
 
-            var localVarPath = "/metadata/taskdefs";
+            var localVarPath = "/metadata/taskdef";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -799,7 +799,7 @@ namespace SwiftConductor.Api
             if (tasktype == null)
                 throw new ApiException(400, "Missing required parameter 'tasktype' when calling MetadataResourceApi->UnregisterTaskDef");
 
-            var localVarPath = "/metadata/taskdefs/{tasktype}";
+            var localVarPath = "/metadata/taskdef/{tasktype}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -867,7 +867,7 @@ namespace SwiftConductor.Api
             if (version == null)
                 throw new ApiException(400, "Missing required parameter 'version' when calling MetadataResourceApi->UnregisterWorkflowDef");
 
-            var localVarPath = "/metadata/workflow/{name}/{version}";
+            var localVarPath = "/metadata/workflowdef/{name}/{version}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -934,7 +934,7 @@ namespace SwiftConductor.Api
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling MetadataResourceApi->Update");
 
-            var localVarPath = "/metadata/workflow";
+            var localVarPath = "/metadata/workflowdef";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1008,7 +1008,7 @@ namespace SwiftConductor.Api
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling MetadataResourceApi->UpdateTaskDef");
 
-            var localVarPath = "/metadata/taskdefs";
+            var localVarPath = "/metadata/taskdef";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1076,7 +1076,7 @@ namespace SwiftConductor.Api
         public ApiResponse<Object> UploadWorkflowsAndTasksDefinitionsToS3WithHttpInfo()
         {
 
-            var localVarPath = "/metadata/workflow-task-defs/upload";
+            var localVarPath = "/metadata/workflowdef-task-defs/upload";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

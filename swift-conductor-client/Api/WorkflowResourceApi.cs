@@ -111,33 +111,7 @@ namespace SwiftConductor.Api
         /// <param name="summarize"> (optional, default to false)</param>
         /// <returns>ApiResponse of Workflow</returns>
         ApiResponse<Workflow> GetExecutionStatusWithHttpInfo(string workflowId, bool? includeTasks = null, bool? summarize = null);
-        /// <summary>
-        /// Gets the workflow tasks by workflow id
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="workflowId"></param>
-        /// <param name="start"> (optional, default to 0)</param>
-        /// <param name="count"> (optional, default to 15)</param>
-        /// <param name="status"> (optional)</param>
-        /// <returns>TaskListSearchResultSummary</returns>
-        TaskListSearchResultSummary GetExecutionStatusTaskList(string workflowId, int? start = null, int? count = null, string status = null);
 
-        /// <summary>
-        /// Gets the workflow tasks by workflow id
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="workflowId"></param>
-        /// <param name="start"> (optional, default to 0)</param>
-        /// <param name="count"> (optional, default to 15)</param>
-        /// <param name="status"> (optional)</param>
-        /// <returns>ApiResponse of TaskListSearchResultSummary</returns>
-        ApiResponse<TaskListSearchResultSummary> GetExecutionStatusTaskListWithHttpInfo(string workflowId, int? start = null, int? count = null, string status = null);
         /// <summary>
         /// Get the uri and path of the external storage where the workflow payload is to be stored
         /// </summary>
@@ -1060,80 +1034,6 @@ namespace SwiftConductor.Api
             return new ApiResponse<Workflow>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
                 (Workflow)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Workflow)));
-        }
-
-        /// <summary>
-        /// Gets the workflow tasks by workflow id 
-        /// </summary>
-        /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="workflowId"></param>
-        /// <param name="start"> (optional, default to 0)</param>
-        /// <param name="count"> (optional, default to 15)</param>
-        /// <param name="status"> (optional)</param>
-        /// <returns>TaskListSearchResultSummary</returns>
-        public TaskListSearchResultSummary GetExecutionStatusTaskList(string workflowId, int? start = null, int? count = null, string status = null)
-        {
-            ApiResponse<TaskListSearchResultSummary> localVarResponse = GetExecutionStatusTaskListWithHttpInfo(workflowId, start, count, status);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Gets the workflow tasks by workflow id 
-        /// </summary>
-        /// <exception cref="SwiftConductor.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="workflowId"></param>
-        /// <param name="start"> (optional, default to 0)</param>
-        /// <param name="count"> (optional, default to 15)</param>
-        /// <param name="status"> (optional)</param>
-        /// <returns>ApiResponse of TaskListSearchResultSummary</returns>
-        public ApiResponse<TaskListSearchResultSummary> GetExecutionStatusTaskListWithHttpInfo(string workflowId, int? start = null, int? count = null, string status = null)
-        {
-            // verify the required parameter 'workflowId' is set
-            if (workflowId == null)
-                throw new ApiException(400, "Missing required parameter 'workflowId' when calling WorkflowResourceApi->GetExecutionStatusTaskList");
-
-            var localVarPath = "/workflow/{workflowId}/tasks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "*/*"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            if (workflowId != null) localVarPathParams.Add("workflowId", this.Configuration.ApiClient.ParameterToString(workflowId)); // path parameter
-            if (start != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "start", start)); // query parameter
-            if (count != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "count", count)); // query parameter
-            if (status != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "status", status)); // query parameter
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("GetExecutionStatusTaskList", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<TaskListSearchResultSummary>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (TaskListSearchResultSummary)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TaskListSearchResultSummary)));
         }
 
         /// <summary>
@@ -2346,7 +2246,7 @@ namespace SwiftConductor.Api
             if (skipTaskRequest == null)
                 throw new ApiException(400, "Missing required parameter 'skipTaskRequest' when calling WorkflowResourceApi->SkipTaskFromWorkflow");
 
-            var localVarPath = "/workflow/{workflowId}/skiptask/{taskReferenceName}";
+            var localVarPath = "/workflow/{workflowId}/skip-task/{taskReferenceName}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
